@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shot Clock</title>
+<link href="style.css" rel="stylesheet">
+</head>
+<div>
+<div id="timer"></div>
+<table style="width: 100%;">
+<tr>
+  <td id="home" style="width: 40%;">Home team</td>
+  <td id="game">1</td>
+  <td id="guest" style="width: 40%;">Guest team</td>
+</tr>
+<tr>
+  <td>
+    <div id="homeScore">0</div>
+    <div id="homeGroundTime">
+      <div id="homeGroundTime1"></div>
+      <div id="homeGroundTime2"></div>
+    </div>
+  </td>
+  <td id="shotClock"></td>
+  <td>
+    <div id="guestScore">0</div>
+    <div id="guestGroundTime">
+      <div id="guestGroundTime1"></div>
+      <div id="guestGroundTime2"></div>
+    </div>
+  </td>
+</tr>
+</table>
+<div>
+  <audio id="audio_1" src="wave/1.wav"></audio>
+  <audio id="audio_11" src="wave/11.wav"></audio>
+  <audio id="audio_end" src="wave/end.wav"></audio>
+</div>
+<div class="bottomBar">github.com/JASCValentine/basketball-scoreboard</div>
+</div>
+<script src="timer.js"></script>
+<script>
+function secToMin(sec) {
+  let min = Math.floor(sec / 60);
+  sec = sec % 60;
+  return `${(min < 10 ? "0" : "") + min.toString()}:${(sec < 10 ? "0" : "") + sec.toString()}`;
+}
+
+var gameTime = new Timer(document.getElementById("timer"), secToMin, document.getElementById("audio_end"), 3600);
+var shotClock = new Timer(document.getElementById("shotClock"), function(sec) { return sec }, document.getElementById("audio_1"), 60);
+
+var homeGroundTime1 = new Timer(document.getElementById("homeGroundTime1"), secToMin, document.getElementById("audio_11"));
+var homeGroundTime2 = new Timer(document.getElementById("homeGroundTime2"), secToMin, document.getElementById("audio_11"));
+var guestGroundTime1 = new Timer(document.getElementById("guestGroundTime1"), secToMin, document.getElementById("audio_11"));
+var guestGroundTime2 = new Timer(document.getElementById("guestGroundTime2"), secToMin, document.getElementById("audio_11"));
+
+function setTimer(timer) {
+  let minSec = prompt("Enter time in [MM:SS]");
+  let match;
+  if (minSec && (match = minSec.match(/(\d+):(\d+)/).map(c => parseInt(c)))) {
+    let seconds = match[1] * 60 + match[2];
+    timer.set(seconds);
+  }
+}
+
+function setShotClock() {
+  let minSec = prompt("Enter shot clock in [SS]");
+  let match;
+  if (minSec && !isNaN(match = parseInt(minSec))) {
+    shotClock.set(match);
+  }
+}
+
+function setGame() {
+  let game = prompt("Enter game match/period");
+  if (game) {
+    document.getElementById("game").innerHTML = game;
+  }
+}
+
+function setTeam(id) {
+  let input = prompt("Enter team name");
+  if (input) {
+    document.getElementById(id).innerHTML = input;
+  }
+}
+
+function addScore(id, score) {
+  let team = document.getElementById(id);
+  let oldScore = parseInt(team.innerHTML);
+  team.innerHTML = oldScore + score;
+}
+
+</script>
+<script>
+document.addEventListener("keydown", function(event) {
+  let keyName = event.key;
+//  console.log(keyName);
+
+  if (/\d/.test(keyName)) {
+    if (event.ctrlKey) {
+      addScore("homeScore", parseInt(keyName));
+    } else if (event.altKey) {
+      addScore("guestScore", parseInt(keyName));
+    }
+    return;
+  }
+
+  switch (keyName) {
+  case 'r':
+    setTimer(gameTime);
+    break;
+  case 'q':
+    if (event.altKey) {
+      setTimer(homeGroundTime1);
+      homeGroundTime1.start();
+    } else {
+      gameTime.start();
+    }
+    break;
+  case 'w':
+    gameTime.stop();
+    break;
+  case 'e':
+    gameTime.reset();
+    break;
+  case 'Z':
+    gameTime.countUp = true;
+    break;
+  case 'X':
+    gameTime.countUp = false;
+    break;
+  case 'c':
+    setGame();
+    break;
+  case 'f':
+    setTeam("home");
+    break;
+  case 'g':
+    setTeam("guest");
+    break;
+  case 'M':
+    if (event.altKey) {
+      shotClock.countUp = true;
+    }
+    break;
+  case 'N':
+    if (event.altKey) {
+      shotClock.countUp = false;
+    }
+    break;
+  case 'v':
+    setShotClock();
+    break;
+  case 'b':
+    shotClock.start();
+    break;
+  case 'n':
+    shotClock.stop();
+    break;
+  case 'm':
+    shotClock.reset();
+    break;
+  case 'E':
+    if (event.altKey) {
+      homeGroundTime1.countUp = true;
+    }
+    break;
+  case 'W':
+    if (event.altKey) {
+      homeGroundTime1.countUp = false;
+    }
+    break;
+  case 'S':
+    if (event.altKey) {
+      homeGroundTime2.countUp = true;
+    }
+    break;
+  case 'D':
+    if (event.altKey) {
+      homeGroundTime2.countUp = false;
+    }
+    break;
+  case 'a':
+    if (event.altKey) {
+      setTimer(homeGroundTime2);
+      homeGroundTime2.start();
+    }
+    break;
+  case 'O':
+    if (event.altKey) {
+      guestGroundTime1.countUp = true;
+    }
+    break;
+  case 'I':
+    if (event.altKey) {
+      guestGroundTime1.countUp = false;
+    }
+    break;
+  case 'u':
+    if (event.altKey) {
+      setTimer(guestGroundTime1);
+      guestGroundTime1.start();
+    }
+    break;
+  case 'L':
+    if (event.altKey) {
+      guestGroundTime2.countUp = true;
+    }
+    break;
+  case 'K':
+    if (event.altKey) {
+      guestGroundTime2.countUp = false;
+    }
+    break;
+  case 'j':
+    if (event.altKey) {
+      setTimer(guestGroundTime2);
+      guestGroundTime2.start();
+    }
+    break;
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: sans-serif;
+}
+
+div, td {
+  text-align: center;
+}
+
+#timer {
+  color: #FFFF00;
+  font-size: 10em;
+}
+
+#home, #guest {
+  color: #00FF00;
+  font-size: 6em;
+}
+
+#game {
+  color: #FF0000;
+  font-size: 5em;
+}
+
+#homeScore, #guestScore {
+  font-size: 5em;
+}
+
+#shotClock {
+  font-size: 8em;
+}
+
+#homeGroundTime, #guestGroundTime {
+  color: #FF0000;
+  font-size: 4em;
+}
+
+.bottomBar {
+  bottom: 0px;
+  font-size: 3em;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
