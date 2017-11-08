@@ -17,7 +17,8 @@ Team name | <kbd>F</kbd> | Home team
 || <kbd>G</kbd> | Guest team
 Score | <kbd>Ctrl</kbd> + <kbd>1-9</kbd> | Home team
 || <kbd>Alt</kbd> + <kbd>1-9</kbd> | Guest team
-Shot clock | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> | Count up
+Shot clock | <kbd>v</kbd> | Input
+|| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> | Count up
 || <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd> | Count down
 || <kbd>B</kbd> | Start
 || <kbd>N</kbd> | Pause
