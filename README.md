@@ -5,7 +5,7 @@ A simple scoreboard used for Basketball match.
 
 Part | Shortcut | Function
 ---- | -------- | --------
-Game time | <kbd>r</kbd> | Input
+Game time | <kbd>R</kbd> | Input
 || <kbd>Shift</kbd> + <kbd>Z</kbd> | Count up
 || <kbd>Shift</kbd> + <kbd>X</kbd> | Count down
 || <kbd>Q</kbd> | Start
@@ -13,11 +13,11 @@ Game time | <kbd>r</kbd> | Input
 || <kbd>E</kbd> | Reset
 || <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> | Stop Long Beep
 Game match / period | <kbd>Ctrl</kbd> + <kbd>C</kbd> | Input
-Team name | <kbd>F</kbd> | Home team
-|| <kbd>G</kbd> | Guest team
+Team name | <kbd>Ctrl</kbd> + <kbd>F</kbd> | Home team
+|| <kbd>Ctrl</kbd> + <kbd>G</kbd> | Guest team
 Score | <kbd>Ctrl</kbd> + <kbd>1-9</kbd> | Home team
 || <kbd>Alt</kbd> + <kbd>1-9</kbd> | Guest team
-Shot clock | <kbd>v</kbd> | Input
+Shot clock | <kbd>V</kbd> | Input
 || <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> | Count up
 || <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd> | Count down
 || <kbd>B</kbd> | Start
