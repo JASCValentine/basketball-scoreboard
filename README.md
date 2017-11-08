@@ -1,4 +1,5 @@
 # basketball-scoreboard
+https://jascvalentine.github.io/basketball-scoreboard/scoreboard.html
 
 A simple scoreboard used for Basketball match.
 
