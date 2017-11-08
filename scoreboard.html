@@ -35,7 +35,12 @@
   <audio id="audio_11" src="wave/11.wav"></audio>
   <audio id="audio_end" src="wave/end.wav"></audio>
 </div>
-<div class="bottomBar">github.com/JASCValentine/basketball-scoreboard</div>
+<div class="bottomBar">
+  <span id="normal">github.com/JASCValentine/basketball-scoreboard</span>
+  <div id="input" style="display: none">
+    <span id="inputPrompt"></span>
+    <input type="text" id="inputText" name="" value="" onkeypress="handleInput(event)" />
+  </div>
 </div>
 <script src="timer.js"></script>
 <script>
@@ -53,32 +58,29 @@ var homeGroundTime2 = new Timer(document.getElementById("homeGroundTime2"), secT
 var guestGroundTime1 = new Timer(document.getElementById("guestGroundTime1"), secToMin, document.getElementById("audio_11"));
 var guestGroundTime2 = new Timer(document.getElementById("guestGroundTime2"), secToMin, document.getElementById("audio_11"));
 
-function setTimer(timer) {
-  let minSec = prompt("Enter time in [MM:SS]");
+var callback = null;
+var callbackArgs = null;
+
+function setTimer(minSec, timer, start) {
   let match;
-  if (minSec && (match = minSec.match(/(\d+):(\d+)/).map(c => parseInt(c)))) {
+  if (minSec && (match = minSec.match(/(\d+):(\d+)/))) {
+    match = match.map(c => parseInt(c));
     let seconds = match[1] * 60 + match[2];
     timer.set(seconds);
+    if (start) {
+      timer.start();
+    }
   }
 }
 
-function setShotClock() {
-  let minSec = prompt("Enter shot clock in [SS]");
+function setShotClock(minSec) {
   let match;
   if (minSec && !isNaN(match = parseInt(minSec))) {
     shotClock.set(match);
   }
 }
 
-function setGame() {
-  let game = prompt("Enter game match/period");
-  if (game) {
-    document.getElementById("game").innerHTML = game;
-  }
-}
-
-function setTeam(id) {
-  let input = prompt("Enter team name");
+function setText(input, id) {
   if (input) {
     document.getElementById(id).innerHTML = input;
   }
@@ -87,12 +89,39 @@ function setTeam(id) {
 function addScore(id, score) {
   let team = document.getElementById(id);
   let oldScore = parseInt(team.innerHTML);
-  team.innerHTML = oldScore + score;
+  team.innerHTML = score ? oldScore + score : 0;
 }
 
-</script>
-<script>
+function promptInput(prompt, callback, ...args) {
+  document.getElementById("input").style.display = "block";
+  document.getElementById("normal").style.display = "none";
+  
+  document.getElementById("inputPrompt").innerHTML = prompt;
+  let inputText = document.getElementById("inputText");
+  inputText.value = "";
+  inputText.focus();
+  
+  this.callback = callback;
+  this.callbackArgs = args;
+}
+
+function handleInput(event) {
+  if (event.key !== "Enter") {
+    return;
+  }
+  
+  document.getElementById("input").style.display = "none";
+  document.getElementById("normal").style.display = "inline";
+  
+  let inputText = document.getElementById("inputText");
+  this.callback.apply(this, [inputText.value, ...this.callbackArgs]);
+}
+
 document.addEventListener("keydown", function(event) {
+  if (event.target.tagName === 'INPUT') {
+    return;
+  }
+  
   let keyName = event.key;
 //  console.log(keyName);
 
@@ -107,12 +136,13 @@ document.addEventListener("keydown", function(event) {
 
   switch (keyName) {
   case 'r':
-    setTimer(gameTime);
+    promptInput("Enter time in [MM:SS]", setTimer, gameTime);
+    event.preventDefault();
     break;
   case 'q':
     if (event.altKey) {
-      setTimer(homeGroundTime1);
-      homeGroundTime1.start();
+      promptInput("Enter time in [MM:SS]", setTimer, homeGroundTime1, true);
+      event.preventDefault();
     } else {
       gameTime.start();
     }
@@ -130,13 +160,22 @@ document.addEventListener("keydown", function(event) {
     gameTime.countUp = false;
     break;
   case 'c':
-    setGame();
+    if (event.ctrlKey) {
+      promptInput("Enter game match/period", setText, "game");
+      event.preventDefault();
+    }
     break;
   case 'f':
-    setTeam("home");
+    if (event.ctrlKey) {
+      promptInput("Enter team name", setText, "home");
+      event.preventDefault();
+    }
     break;
   case 'g':
-    setTeam("guest");
+    if (event.ctrlKey) {
+      promptInput("Enter team name", setText, "guest");
+      event.preventDefault();
+    }
     break;
   case 'M':
     if (event.altKey) {
@@ -149,7 +188,8 @@ document.addEventListener("keydown", function(event) {
     }
     break;
   case 'v':
-    setShotClock();
+    promptInput("Enter shot clock in [SS]", setShotClock);
+    event.preventDefault();
     break;
   case 'b':
     shotClock.start();
@@ -182,8 +222,8 @@ document.addEventListener("keydown", function(event) {
     break;
   case 'a':
     if (event.altKey) {
-      setTimer(homeGroundTime2);
-      homeGroundTime2.start();
+      promptInput("Enter time in [MM:SS]", setTimer, homeGroundTime2, true);
+      event.preventDefault();
     }
     break;
   case 'O':
@@ -198,8 +238,8 @@ document.addEventListener("keydown", function(event) {
     break;
   case 'u':
     if (event.altKey) {
-      setTimer(guestGroundTime1);
-      guestGroundTime1.start();
+      promptInput("Enter time in [MM:SS]", setTimer, guestGroundTime1, true);
+      event.preventDefault();
     }
     break;
   case 'L':
@@ -214,8 +254,8 @@ document.addEventListener("keydown", function(event) {
     break;
   case 'j':
     if (event.altKey) {
-      setTimer(guestGroundTime2);
-      guestGroundTime2.start();
+      promptInput("Enter time in [MM:SS]", setTimer, guestGroundTime2, true);
+      event.preventDefault();
     }
     break;
   }
