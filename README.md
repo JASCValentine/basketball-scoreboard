@@ -4,7 +4,8 @@ A simple scoreboard used for Basketball match.
 
 Part | Shortcut | Function
 ---- | -------- | --------
-Game time | <kbd>Shift</kbd> + <kbd>Z</kbd> | Count up
+Game time | <kbd>r</kbd> | Input
+|| <kbd>Shift</kbd> + <kbd>Z</kbd> | Count up
 || <kbd>Shift</kbd> + <kbd>X</kbd> | Count down
 || <kbd>Q</kbd> | Start
 || <kbd>W</kbd> | Pause
