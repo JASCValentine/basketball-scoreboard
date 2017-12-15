@@ -1,7 +1,9 @@
 body {
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #000000;
   font-family: sans-serif;
+  font-weight: bold;
+  -webkit-text-stroke: 0.2em #000000;
 }
 
 div, td {
@@ -38,6 +40,7 @@ div, td {
 
 .bottomBar {
   bottom: 0px;
+  display: none;
   font-size: 3em;
   position: absolute;
   text-align: center;
