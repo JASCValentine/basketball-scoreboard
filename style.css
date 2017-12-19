@@ -4,8 +4,8 @@ body {
   font-family: sans-serif;
 }
 
-div, td {
-  text-align: center;
+.footer {
+  font-size: 3em;
 }
 
 #timer {
@@ -34,12 +34,4 @@ div, td {
 #homeGroundTime, #guestGroundTime {
   color: #FF0000;
   font-size: 4em;
-}
-
-.bottomBar {
-  bottom: 0px;
-  font-size: 3em;
-  position: absolute;
-  text-align: center;
-  width: 100%;
 }
