@@ -4,42 +4,34 @@ body {
   font-family: sans-serif;
 }
 
-div, td {
-  text-align: center;
+footer, #input {
+  font-size: 3rem;
 }
 
 #timer {
   color: #FFFF00;
-  font-size: 10em;
+  font-size: 10rem;
 }
 
 #home, #guest {
   color: #00FF00;
-  font-size: 6em;
+  font-size: 6rem;
 }
 
 #game {
   color: #FF0000;
-  font-size: 5em;
+  font-size: 5rem;
 }
 
 #homeScore, #guestScore {
-  font-size: 5em;
+  font-size: 5rem;
 }
 
 #shotClock {
-  font-size: 8em;
+  font-size: 8rem;
 }
 
 #homeGroundTime, #guestGroundTime {
   color: #FF0000;
-  font-size: 4em;
-}
-
-.bottomBar {
-  bottom: 0px;
-  font-size: 3em;
-  position: absolute;
-  text-align: center;
-  width: 100%;
+  font-size: 4rem;
 }
