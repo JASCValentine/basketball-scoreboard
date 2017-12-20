@@ -2,48 +2,68 @@
 <html>
 <head>
 <title>Shot Clock</title>
+<style type="text/css">
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0;
+}
+
+div {
+  margin-bottom: auto;
+  margin-top: auto;
+  text-align: center;
+}
+
+.grid-wrapper {
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: 40% 20% 40%;
+  grid-auto-rows: 0fr;
+}
+</style>
 <link href="style.css" rel="stylesheet">
 </head>
-<div>
-<div id="timer"></div>
-<table style="width: 100%;">
-<tr>
-  <td id="home" style="width: 40%;">Home team</td>
-  <td id="game">1</td>
-  <td id="guest" style="width: 40%;">Guest team</td>
-</tr>
-<tr>
-  <td>
-    <div id="homeScore">0</div>
-    <div id="homeGroundTime">
-      <div id="homeGroundTime1"></div>
-      <div id="homeGroundTime2"></div>
+<body>
+  <div class="grid-wrapper">
+    <div id="timer" style="grid-column: span 3;"></div>
+    <div id="home">Home team</div>
+    <div id="game">1</div>
+    <div id="guest">Guest team</div>
+    <div>
+      <div id="homeScore">0</div>
+      <div id="homeGroundTime">
+        <div id="homeGroundTime1"></div>
+        <div id="homeGroundTime2"></div>
+      </div>
     </div>
-  </td>
-  <td id="shotClock"></td>
-  <td>
-    <div id="guestScore">0</div>
-    <div id="guestGroundTime">
-      <div id="guestGroundTime1"></div>
-      <div id="guestGroundTime2"></div>
+    <div id="shotClock"></div>
+    <div>
+      <div id="guestScore">0</div>
+      <div id="guestGroundTime">
+        <div id="guestGroundTime1"></div>
+        <div id="guestGroundTime2"></div>
+      </div>
     </div>
-  </td>
-</tr>
-</table>
-<div>
-  <audio id="audio_1" src="wave/1.wav"></audio>
-  <audio id="audio_11" src="wave/11.wav"></audio>
-  <audio id="audio_end" src="wave/end.wav"></audio>
-</div>
-<div class="bottomBar">
-  <span id="normal">github.com/JASCValentine/basketball-scoreboard</span>
+  </div>
+  <div>
+    <audio id="audio_1" src="wave/1.wav"></audio>
+    <audio id="audio_11" src="wave/11.wav"></audio>
+    <audio id="audio_end" src="wave/end.wav"></audio>
+  </div>
   <div id="input" style="display: none">
     <span id="inputPrompt"></span>
     <input type="text" id="inputText" name="" value="" onkeypress="handleInput(event)" />
   </div>
-</div>
-<script src="timer.js"></script>
-<script>
+  <footer>
+    <div>github.com/JASCValentine/basketball-scoreboard</div>
+  </footer>
+  <script src="timer.js"></script>
+  <script>
 function secToMin(sec) {
   let min = Math.floor(sec / 60);
   sec = sec % 60;
@@ -94,7 +114,6 @@ function addScore(id, score) {
 
 function promptInput(prompt, callback, ...args) {
   document.getElementById("input").style.display = "block";
-  document.getElementById("normal").style.display = "none";
   
   document.getElementById("inputPrompt").innerHTML = prompt;
   let inputText = document.getElementById("inputText");
@@ -111,7 +130,6 @@ function handleInput(event) {
   }
   
   document.getElementById("input").style.display = "none";
-  document.getElementById("normal").style.display = "inline";
   
   let inputText = document.getElementById("inputText");
   this.callback.apply(this, [inputText.value, ...this.callbackArgs]);
@@ -260,6 +278,6 @@ document.addEventListener("keydown", function(event) {
     break;
   }
 });
-</script>
+  </script>
 </body>
 </html>
