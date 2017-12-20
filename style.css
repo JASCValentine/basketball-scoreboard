@@ -5,17 +5,17 @@ body {
 }
 
 footer {
-  font-size: 1.5rem;
+  font-size: 3rem;
 }
 
 #timer {
   color: #FFFF00;
-  font-size: 14rem;
+  font-size: 10rem;
 }
 
 #home, #guest {
   color: #00FF00;
-  font-size: 3rem;
+  font-size: 6rem;
 }
 
 #game {
@@ -24,14 +24,14 @@ footer {
 }
 
 #homeScore, #guestScore {
-  font-size: 8rem;
+  font-size: 5rem;
 }
 
 #shotClock {
-  font-size: 10rem;
+  font-size: 8rem;
 }
 
 #homeGroundTime, #guestGroundTime {
   color: #FF0000;
-  font-size: 5rem;
+  font-size: 4rem;
 }
