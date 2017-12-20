@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-footer {
+footer, #input {
   font-size: 3rem;
 }
 
